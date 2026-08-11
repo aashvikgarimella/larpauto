@@ -1,6 +1,13 @@
 ---
 import '../styles/global.css';
 const { title, description } = Astro.props;
+
+// BASE_URL is '/larpauto' on the project subpath and '/' on the apex domain,
+// and Astro does not guarantee a trailing slash — so normalise before joining
+// or you get '/larpautofavicon.svg'. Every root-relative asset goes through
+// this helper or it 404s on GitHub Pages.
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const asset = (p) => `${base}/${p.replace(/^\//, '')}`;
 ---
 
 <!doctype html>
@@ -11,9 +18,9 @@ const { title, description } = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#bfe6ff" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/chivo.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href={asset("favicon.svg")} type="image/svg+xml" />
+    <link rel="preload" href={asset("fonts/archivo.woff2")} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={asset("fonts/chivo.woff2")} as="font" type="font/woff2" crossorigin />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

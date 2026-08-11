@@ -171,7 +171,7 @@ const arrow = `<svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" fo
 >
   <header class="masthead">
     <div class="wrap masthead__in">
-      <a class="mark" href="/">
+      <a class="mark" href={import.meta.env.BASE_URL.replace(/\/$/, "") + "/"}>
         <Fragment set:html={logoCarSVG(10)} />
         <span>{site.wordmark}<span class="mark__tail">&nbsp;{site.wordmarkTail}</span></span>
       </a>
