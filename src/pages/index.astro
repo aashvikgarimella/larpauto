@@ -1,0 +1,700 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site.js';
+import {
+  raceScene,
+  spreadScene,
+  auditScene,
+  venueScene,
+  dossierScene,
+  ladderScene,
+  sceneSVG,
+  logoCarSVG,
+} from '../lib/scenes.js';
+
+const hero = raceScene(10);
+const spread = spreadScene(13);
+
+const stages = [
+  {
+    n: 1,
+    title: 'Assess and value',
+    body: 'A free thirty-minute conversation first, to establish whether the car is worth taking on at all. Then paint-meter readings, a records review, and comparable sale analysis to find what the car should reach — and what a dealer will offer instead.',
+    scene: auditScene(10),
+    alt: 'A voxel coupe on its plinth with three measurement points marked in brass.',
+  },
+  {
+    n: 2,
+    title: 'Prepare and document',
+    body: 'Detailing, paint correction where it pays for itself, then the full record: photography, video, undercarriage, the maintenance timeline, the Carfax, the ownership history, and the flaws written down rather than cropped out.',
+    scene: dossierScene(11),
+    alt: 'Stacked voxel plates, the topmost in brass: the assembled listing dossier.',
+  },
+  {
+    n: 3,
+    title: 'Choose the venue, run the sale',
+    body: 'The marketplace is a decision, not a default. Once chosen, the listing is written, launched and worked — comments answered, bidders qualified, questions handled — through to the hammer and the wire.',
+    scene: venueScene(10),
+    alt: 'A voxel coupe with dashed routes to four venue pads, one lit in brass.',
+  },
+  {
+    n: 4,
+    title: 'And if it does not sell',
+    body: 'An unsold auction is not the end of the engagement. The car moves to a private-party listing using the same media and documentation, and after sixty days to the dealer network. You are not left holding a car and a receipt.',
+    scene: ladderScene(11),
+    alt: 'Four voxel columns rising in sequence, the last in brass: the fallback ladder.',
+  },
+];
+
+const venues = [
+  {
+    name: 'Bring a Trailer',
+    when: 'Documented, original, rare and collector cars, where provenance and a deep comment section create competition. The wrong home for a heavily modified daily driver.',
+  },
+  {
+    name: 'Cars & Bids',
+    when: 'Newer enthusiast metal, modern performance, and modified cars — an audience that reads a tasteful build as value rather than as a deduction.',
+  },
+  {
+    name: 'Private sale',
+    when: 'Higher-mileage cars, niche models with a small and findable buyer pool, and cars where a local handover beats a national auction.',
+  },
+  {
+    name: 'Dealer consignment',
+    when: 'Occasionally, genuinely, the better answer — and one most consignment services will never mention, because it is the one that pays them least.',
+  },
+  {
+    name: 'Exotic specialist',
+    when: 'Ferrari, McLaren, Lamborghini and Porsche GT cars, where the buyer is already inside a dealer network and the auction floor is not where they shop.',
+  },
+];
+
+const standard = [
+  '100+ photographs, shot to auction standard',
+  'Cold-start and driving video',
+  'Full undercarriage documentation',
+  'Walkaround video, narrated',
+  'A maintenance timeline built from the records',
+  'Carfax pulled and read, not just attached',
+  'Ownership history, documented',
+  'Known flaws photographed and described',
+  'A written listing that reads like a feature, not a classified',
+];
+
+const refusals = [
+  {
+    title: 'We will not quote you a sale price.',
+    body: 'Anyone who tells you what your car will bring before it is listed is guessing, and setting you up to blame them. What we commit to is maximum exposure and professional presentation, so the car reaches the strongest number the market has on the day.',
+  },
+  {
+    title: 'We will not assume your car belongs at auction.',
+    body: 'Not every enthusiast car should go to Bring a Trailer, and a service that only lists there is not selecting a venue, it is selecting the one it knows. Sometimes the honest answer is a private sale, or a dealer, or that you should keep the car.',
+  },
+  {
+    title: 'We will not hide a flaw.',
+    body: 'Undisclosed paintwork found by a bidder costs more than the flaw ever would have. Documented flaws raise bidder confidence and, counter-intuitively, the price. Everything we find goes in the listing.',
+  },
+  {
+    title: 'We do not control the market.',
+    body: 'Values move. A well-prepared car in a soft month still sells for less than a poorly prepared one in a hot month. We control preparation, documentation, venue and exposure — and we will tell you plainly when the market, not the listing, is the problem.',
+  },
+];
+
+const requirements = [
+  {
+    title: 'Photo ID and registration, before anything starts',
+    body: 'We do not begin work on a vehicle until we have seen government photo ID and the current registration, and the two match. Without them the engagement does not start and the prep fee is not refunded.',
+  },
+  {
+    title: 'Selling a car that is not in your name',
+    body: 'The registered owner comes to the appointment with you, or joins a video call and shows their ID. There is no third option. This is how vehicle fraud works, and we are not going to be the part of it that made it easy.',
+  },
+  {
+    title: 'No checks',
+    body: 'Payment is confirmed and cleared before we meet in person — bank transfer or an equivalent we can verify. Not a check, not a payment app screenshot, not a promise at the kerb.',
+  },
+];
+
+const extras = [
+  'Pre-purchase inspection coordination',
+  'Paint correction',
+  'Ceramic coating',
+  'Storage during sale',
+  'Enclosed transport',
+  'Maintenance record digitisation',
+  'Vehicle sourcing',
+  'Buying consultation',
+  'Auction representation',
+];
+
+const marques = [
+  'Porsche', 'BMW M', 'Mercedes-AMG', 'Audi RS', 'Corvette', 'Shelby',
+  'Supra', 'Lotus', 'Ferrari', 'Lamborghini', 'McLaren', 'Air-cooled',
+  'Japanese classics', 'Special editions',
+];
+
+const faqs = [
+  {
+    q: 'You are new. Why would I hand you my car?',
+    a: 'That is the right question, and the honest answer is that you should judge the standard rather than the résumé. Everything above is specific and checkable: the documentation list, the venue logic, the pricing structure, and the things we refuse to promise. Ask on the call for the reasoning behind any of it. A track record is something we are building; a method is something you can inspect today.',
+  },
+  {
+    q: 'What if the car does not sell?',
+    a: 'The engagement continues. The car moves to a private-party listing using the media and documentation already produced, and after sixty days to the dealer network. The prep fee covers the work regardless; the success fee is only owed when the car actually sells.',
+  },
+  {
+    q: 'Do I need a written trade offer first?',
+    a: 'Not for the fee — that is set by your car\'s value band and does not move. But getting a written dealer quote is still the first thing we will ask you to do, because it is the only honest way to know afterwards whether this was worth doing. It is worth getting whether or not you engage us.',
+  },
+  {
+    q: 'Where does the car live during the sale?',
+    a: 'Preparation and photography are arranged around your schedule and location.',
+    note: 'Decide whether the car stays with the owner, moves to a partner facility, or both — and confirm what insurance covers it while in your care. This is the question a $150,000 car owner asks first.',
+  },
+  {
+    q: 'Do you work outside South Florida?',
+    a: `The service is built around ${site.counties}, because venue judgement and the shop relationships behind preparation are local knowledge. Ask on the call if you are outside it — sometimes the answer is yes, and sometimes the honest answer is that you would be better served by someone in your own market.`,
+  },
+  {
+    q: 'What does the free consultation actually cover?',
+    a: 'Thirty minutes on the car: what it is, what the records look like, what the market is doing with that model, which venue suits it, and a candid view of whether the spread is large enough to be worth anyone\'s time. If it is not, we will say so, and you will have lost half an hour.',
+  },
+];
+
+const check = `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8.5l4 4L14 3.5" fill="none" stroke="#C7A96B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const arrow = `<svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+
+<Base
+  title={`${site.name} — enthusiast vehicle sales advisory, ${site.region}`}
+  description="A white-glove sales service for enthusiast and collector cars. Valuation, venue selection, preparation, documentation and negotiation. $750 to begin, success fee on sale."
+>
+  <header class="masthead">
+    <div class="wrap masthead__in">
+      <a class="mark" href="/">
+        <Fragment set:html={logoCarSVG(10)} />
+        <span>{site.wordmark}<span class="mark__tail">&nbsp;{site.wordmarkTail}</span></span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#fee">Fee</a>
+        <a href="#gap">The gap</a>
+        <a href="#engagement">The engagement</a>
+        <a href="#standard">The standard</a>
+        <a href="#requirements">Requirements</a>
+        <a href="#questions">Questions</a>
+      </nav>
+
+      <a class="btn" href={site.bookingUrl}>
+        <span class="btn__long">Book a consultation</span>
+        <span class="btn__short">Consult</span>
+        <Fragment set:html={arrow} />
+      </a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ---------------------------------------------------------- hero -->
+    <section class="hero">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <h1>Recover the equity hidden in your car.</h1>
+          <p class="hero__sub">
+            A white-glove sales service for enthusiast and collector vehicles in
+            {site.region}. We handle the valuation, the venue, the preparation,
+            the documentation and the negotiation.
+          </p>
+        </div>
+
+        <div class="stage hero__stage">
+          <Fragment set:html={sceneSVG(hero, {
+            className: '',
+            title: 'Three cars running the same road at different speeds',
+            desc: 'An isometric voxel road with three cars — blue, red and yellow — travelling along it. The red one is quickest.',
+          })} />
+        </div>
+
+        <div class="hero__cta">
+          <div class="hero__actions">
+            <a class="btn" href={site.bookingUrl}>
+              Book a free consultation
+              <Fragment set:html={arrow} />
+            </a>
+            <a class="btn btn--ghost" href="#engagement">See the engagement</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------- fee -->
+    <section class="section" id="fee">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>What it costs, before you ask.</h2>
+          <p>
+            A small fee covers the hard costs of preparation. The rest is owed
+            only when the car sells. Both numbers are on this page because you
+            should be able to decide before spending twenty minutes on a call
+            finding them out.
+          </p>
+        </div>
+
+        <div class="pricing">
+          <div class="panel price">
+            <span class="price__fig">
+              <span>${site.prepFee}</span>
+              <span class="price__unit">flat, any car, to begin</span>
+            </span>
+            <p>
+              Covers detailing coordination, paint-meter inspection, the full
+              photography and video shoot, records review and the written
+              listing. Charged once, regardless of what the car is worth.
+            </p>
+            <p>
+              <strong>The prep fee is not refundable.</strong> If you decide to
+              move forward with us, that decision is final — the work starts
+              immediately and the fee covers it whether or not you later change
+              your mind about selling.
+            </p>
+          </div>
+
+          <div class="panel price">
+            <span class="price__fig">
+              <span>By value</span>
+              <span class="price__unit">on completion</span>
+            </span>
+            <p>
+              A flat success fee set by the vehicle's value band, owed only when
+              the car sells. No percentage, no share of the sale — the number is
+              known before we start and does not move with the result.
+            </p>
+
+            <table class="tiers">
+              <caption>Success fee by vehicle value</caption>
+              <thead>
+                <tr><th scope="col">Vehicle value</th><th scope="col">Success fee</th></tr>
+              </thead>
+              <tbody>
+                {site.tiers.map((t) => (
+                  <tr><td>{t.band}</td><td>{t.min}</td></tr>
+                ))}
+              </tbody>
+            </table>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------------- gap -->
+    <section class="section section--sunk" id="gap">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>The gap is the product.</h2>
+          <p>
+            What a dealer offers you and what the same car reaches in a well-run
+            sale are not the same number. That difference already belongs to
+            you. The only question is whether the sale is run well enough to
+            reach it.
+          </p>
+        </div>
+
+        <div class="gap">
+          <div class="stage gap__stage">
+            <Fragment set:html={sceneSVG(spread, {
+              title: 'Trade offer against a well-run sale',
+              desc: 'Two voxel columns. The left shows the trade offer with the unreached value drawn as a faint outline above it; the right shows the same base with the recovered difference stacked on top in brass.',
+            })} />
+          </div>
+
+          <div class="panel ledger">
+            <p class="ledger__note">
+              <span class="todo">Illustration</span>
+              Worked example, not a past result. We have not sold this car.
+            </p>
+            <dl>
+              <div class="ledger__row"><dt>Documented trade offer</dt><dd>$56,000</dd></div>
+              <div class="ledger__row"><dt>Well-run private sale</dt><dd>$64,500</dd></div>
+              <div class="ledger__row"><dt>Difference recovered</dt><dd>$8,500</dd></div>
+              <div class="ledger__row"><dt>Prep fee</dt><dd>−$750</dd></div>
+              <div class="ledger__row"><dt>Success fee ($40–70k band)</dt><dd>−$750</dd></div>
+              <div class="ledger__row is-total"><dt>You keep</dt><dd>$7,000</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------- engagement -->
+    <section class="section" id="engagement">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Four stages, and one of them is what happens if it fails.</h2>
+          <p>
+            Selling is only part of it. The work is valuation, market selection,
+            preparation, documentation, listing strategy and negotiation —
+            which is why this is not a photography service with a longer invoice.
+          </p>
+        </div>
+
+        <div class="stages">
+          {stages.map((s) => (
+            <article class="stagecard">
+              <div class="stage stage--plain stagecard__art">
+                <Fragment set:html={sceneSVG(s.scene, { title: s.title, desc: s.alt })} />
+              </div>
+              <div class="stagecard__body">
+                <span class="stagecard__n" aria-hidden="true">{s.n}</span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------- venues -->
+    <section class="section section--sunk">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Not every car belongs at auction.</h2>
+          <p>
+            Choosing where a car sells is the part of this job that most changes
+            the number, and the part most services skip. Here is how the call
+            actually gets made.
+          </p>
+        </div>
+
+        <div class="venues">
+          {venues.map((v) => (
+            <div class="venue">
+              <h3>{v.name}</h3>
+              <p>{v.when}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------ standard -->
+    <section class="section" id="standard">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>The standard every car gets.</h2>
+          <p>
+            A bidder's confidence is built from what they can verify. This is the
+            record produced for every engagement, whether the car is a $45,000
+            Cayman or a $300,000 GT car.
+          </p>
+        </div>
+
+        <div class="standard">
+          <ul>
+            {standard.map((item) => (
+              <li>
+                <Fragment set:html={check} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------ refusals -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>What we will never tell you.</h2>
+          <p>
+            A service that promises a number has given you something to resent
+            when the market moves. These are the four things you will not hear
+            from us, and the reasoning behind each.
+          </p>
+        </div>
+
+        <div class="refusals">
+          {refusals.map((r) => (
+            <div class="panel refusal">
+              <h3>{r.title}</h3>
+              <p>{r.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------------- extras -->
+    <section class="section section--sunk">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Also handled.</h2>
+          <p>
+            Arranged as part of an engagement or on their own, through the
+            specialist shops we work with.
+          </p>
+        </div>
+
+        <div class="extras">
+          {extras.map((e) => <span>{e}</span>)}
+        </div>
+
+        <div class="marques">
+          {marques.map((m) => <span>{m}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- -------------------------------------------------- requirements -->
+    <section class="section" id="requirements">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Three conditions, and they are not negotiable.</h2>
+          <p>
+            These protect you as much as they protect us. A buyer paying six
+            figures wants to know the seller was verified, and a service that
+            skips this is a service that has been used to move a stolen car.
+          </p>
+        </div>
+
+        <div class="refusals">
+          {requirements.map((r) => (
+            <div class="panel refusal">
+              <h3>{r.title}</h3>
+              <p>{r.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ----------------------------------------------------- questions -->
+    <section class="section" id="questions">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Questions worth asking.</h2>
+        </div>
+
+        <div class="faq">
+          {faqs.map((f, i) => (
+            <details open={i === 0}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
+              {f.note && (
+                <p class="faq__note">
+                  <span class="todo">Answer</span> {f.note}
+                </p>
+              )}
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------------------------------------------------------- form -->
+    <section class="close" id="start">
+      <div class="wrap">
+        <div class="section__head">
+          <h2>Start with the car.</h2>
+          <p>
+            The more of this we have up front, the more accurately we can tell
+            you what your car is worth and which venue suits it — before you
+            spend a cent. The first six take two minutes. The last four are
+            optional, and they are the ones that make you more money.
+          </p>
+        </div>
+
+        <p class="form__sent" id="sent" hidden>
+          <span id="sent-text"></span>
+        </p>
+
+        <form
+          class="panel form"
+          id="valuation"
+          name="valuation"
+          method="POST"
+          action="https://api.web3forms.com/submit"
+          data-key={site.formAccessKey || ''}
+          data-inbox={site.email}
+        >
+          <input type="hidden" name="access_key" value={site.formAccessKey || ''} />
+          <input type="hidden" name="subject" value="New valuation request — larpauto.com" />
+          <input type="hidden" name="from_name" value="LARP Auto website" />
+          <p class="form__trap">
+            <label>Leave this empty<input name="company-website" tabindex="-1" autocomplete="off" /></label>
+          </p>
+
+          <div class="form__grid">
+            <p class="field">
+              <label for="f-name">Your name</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required />
+            </p>
+            <p class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required />
+            </p>
+
+            <p class="field field--wide">
+              <label for="f-vin">VIN</label>
+              <input id="f-vin" name="vin" type="text" inputmode="text" maxlength="17" minlength="11" spellcheck="false" required />
+              <span class="field__hint">17 characters, on the dash at the base of the windscreen or inside the driver&rsquo;s door jamb.</span>
+            </p>
+
+            <p class="field">
+              <label for="f-mileage">Mileage</label>
+              <input id="f-mileage" name="mileage" type="text" inputmode="numeric" required />
+            </p>
+            <p class="field">
+              <label for="f-owners">Number of owners</label>
+              <input id="f-owners" name="owners" type="text" inputmode="numeric" required />
+            </p>
+
+            <p class="field field--wide">
+              <label for="f-accidents">Accident history</label>
+              <textarea id="f-accidents" name="accidents" rows="3" required></textarea>
+              <span class="field__hint">Including none. If there has been work done, say what and roughly when — a disclosed repair costs far less than one a bidder finds.</span>
+            </p>
+          </div>
+
+          <div class="form__optional">
+            <h3>Optional, and worth the ten minutes</h3>
+            <p class="form__note">
+              Every one of these raises what the car sells for. Buyers pay for
+              certainty, and this is what certainty is made of. Send what you
+              have; leave the rest blank.
+            </p>
+
+            <div class="form__grid">
+              <p class="field field--wide">
+                <label for="f-options">Window sticker or list of options</label>
+                <textarea id="f-options" name="options" rows="3"></textarea>
+                <span class="field__hint">The original sticker is ideal. Failing that, list what you know: package, wheels, seats, paint, anything ticked at order.</span>
+              </p>
+
+              <p class="field field--wide">
+                <label for="f-trade">Trade-in offer you were given</label>
+                <input id="f-trade" name="trade_offer" type="text" />
+                <span class="field__hint">The number to beat. Written quotes are best, but tell us even if it was verbal.</span>
+              </p>
+
+              <p class="field field--wide">
+                <label for="f-service">Service history</label>
+                <textarea id="f-service" name="service_history" rows="3"></textarea>
+                <span class="field__hint">Where it was serviced, what has been done recently, and whether you have the records and receipts.</span>
+              </p>
+
+              <p class="field field--wide">
+                <label for="f-mods">Modifications</label>
+                <textarea id="f-mods" name="modifications" rows="3"></textarea>
+                <span class="field__hint">What was changed, by whom, and whether you still have the original parts. Keeping the stock parts is often worth thousands.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="form__foot">
+            <button class="btn" type="submit">
+              Send it over
+              <Fragment set:html={arrow} />
+            </button>
+            <p class="form__small">
+              This costs nothing and commits you to nothing. We reply with a
+              read on the car, the venue we would choose, and whether the spread
+              is worth anyone&rsquo;s time — including when it is not. Nothing
+              starts, and no fee is owed, until you say so.
+            </p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script is:inline>
+      (function () {
+        var form = document.getElementById('valuation');
+        if (!form) return;
+
+        var sent = document.getElementById('sent');
+        var text = document.getElementById('sent-text');
+        var btn = form.querySelector('button[type="submit"]');
+        var btnLabel = btn ? btn.innerHTML : '';
+
+        var show = function (msg, ok) {
+          if (!sent || !text) return;
+          text.textContent = msg;
+          sent.hidden = false;
+          sent.setAttribute('role', ok ? 'status' : 'alert');
+          sent.classList.toggle('is-error', !ok);
+          sent.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        };
+
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          // honeypot: a bot filled the hidden field
+          if (form.elements['company-website'] && form.elements['company-website'].value) return;
+          if (!form.reportValidity()) return;
+
+          var key = form.getAttribute('data-key');
+          var inbox = form.getAttribute('data-inbox');
+
+          if (!key) {
+            show(
+              'This form is not connected yet, so nothing was sent. Please email ' +
+              inbox + ' directly and we will pick it up from there.',
+              false
+            );
+            return;
+          }
+
+          if (btn) {
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+          }
+
+          fetch(form.action, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(form),
+          })
+            .then(function (r) {
+              return r.json().catch(function () { return { success: r.ok }; });
+            })
+            .then(function (data) {
+              if (data && data.success) {
+                form.reset();
+                show(
+                  'Sent. We will come back to you at the address you gave, ' +
+                  'usually within a day.',
+                  true
+                );
+                if (btn) btn.remove();
+              } else {
+                throw new Error((data && data.message) || 'rejected');
+              }
+            })
+            .catch(function () {
+              show(
+                'That did not go through. Please email ' + inbox +
+                ' directly, or try again in a moment.',
+                false
+              );
+              if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = btnLabel;
+              }
+            });
+        });
+      })();
+    </script>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <p><strong>{site.name}</strong> — {site.counties}.</p>
+      <p>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </footer>
+</Base>

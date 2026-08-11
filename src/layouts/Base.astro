@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#bfe6ff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/chivo.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body>
+    <!--
+    THESIS: The spread between a trade offer and a well-run sale is the product, so this page is a build-instruction sheet whose diagrams move — not the dark-hero-plus-gradient-plus-logo-wall consignment page, which it refuses.
+    OWN-WORLD: White ground, page-blue #BFE6FF instruction fields carrying a dot grid, 1.5px black keylines on every surface and every voxel face, brick red #E53935 reserved for value recovered, part yellow #FFD23F for parts and the primary action. Archivo 800/900 over Chivo. Isometric voxel vehicles are the only illustration.
+    STORY: An owner holding a disappointing trade number learns what the gap is, how it gets closed, what it costs, and what will never be promised — then books a free consultation.
+    FIRST VIEWPORT: Headline left over a three-cell meta rail; right, a page-blue field holding a voxel road with three cars running it at different speeds, the red one quickest.
+    FORM: Brick/voxel world, user-pinned twice — voxels, then this light instruction-book rendition with racing motion. A pinned brief beats the roll. Seed key da555837.
+    FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <a class="skip" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>

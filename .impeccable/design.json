@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-04T00:00:00Z",
+  "title": "Design System: LARP Auto",
+  "extensions": {
+    "colorMeta": {
+      "page-blue": {
+        "role": "primary",
+        "displayName": "Instruction Page Blue",
+        "canonical": "#bfe6ff",
+        "tonalRamp": [
+          "#0a2d42",
+          "#12405c",
+          "#1d6b9c",
+          "#3b95d4",
+          "#5fb8f2",
+          "#8fd4ff",
+          "#bfe6ff",
+          "#e8f6ff"
+        ]
+      },
+      "brick-red": {
+        "role": "secondary",
+        "displayName": "Brick Red",
+        "canonical": "#e53935",
+        "tonalRamp": [
+          "#3d0d0c",
+          "#6b1613",
+          "#8f1f1c",
+          "#bc2a26",
+          "#e53935",
+          "#f2564f",
+          "#f88b86",
+          "#fdd8d6"
+        ]
+      },
+      "part-yellow": {
+        "role": "tertiary",
+        "displayName": "Part Yellow",
+        "canonical": "#ffd23f",
+        "tonalRamp": [
+          "#3d3007",
+          "#6b5410",
+          "#94741a",
+          "#ddaf23",
+          "#ffd23f",
+          "#ffdf72",
+          "#ffeaa4",
+          "#fff6d8"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#12171c",
+        "tonalRamp": [
+          "#050708",
+          "#0b0e11",
+          "#12171c",
+          "#2b333a",
+          "#454f58",
+          "#5e686f",
+          "#98a2aa",
+          "#d7dee4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "One per surface."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "A monetary quantity. Numbers only."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Sequence numbers in a staged process."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Term half of a term/value pair. Never above a heading."
+      }
+    },
+    "shadows": [
+      {
+        "name": "action-rest",
+        "value": "0 3px 7px -3px rgba(18,23,28,.32), 0 10px 20px -10px rgba(18,23,28,.24)",
+        "purpose": "The only resting shadow; buttons alone."
+      },
+      {
+        "name": "action-hover",
+        "value": "0 6px 12px -4px rgba(18,23,28,.32), 0 16px 28px -12px rgba(18,23,28,.24)",
+        "purpose": "Paired with a 2px lift."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-expo",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Transitions and the seat animation."
+      },
+      {
+        "name": "drive",
+        "value": "translate(0,0) -> translate(var(--dx), var(--dy)), fading in at 7% and out at 100%",
+        "purpose": "Travel of n grid units along +x. Racing cars run it linear at 4.4-6.3s with staggered negative delays; the venue car runs it eased at 3.4s."
+      },
+      {
+        "name": "seat",
+        "value": "translateY(calc(var(--drop) * -1)) -> translateY(0) over 0.9s",
+        "purpose": "The recovered spread landing on the trade-offer column, once."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "standard-two-up",
+        "value": "40rem"
+      },
+      {
+        "name": "venue-split",
+        "value": "46rem"
+      },
+      {
+        "name": "stages-two-up",
+        "value": "50rem"
+      },
+      {
+        "name": "refusals-split",
+        "value": "52rem"
+      },
+      {
+        "name": "gap-and-pricing-split",
+        "value": "58rem"
+      },
+      {
+        "name": "hero-split",
+        "value": "62rem"
+      },
+      {
+        "name": "nav-visible",
+        "value": "66rem"
+      },
+      {
+        "name": "standard-three-up",
+        "value": "68rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The accent inverted: brass ground, page-ground text. The only action colour on the surface.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Book a free consultation<svg class=\"ds-btn__a\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><path d=\"M2 8h11M9 4l4 4-4 4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a>",
+      "css": ".ds-btn { display:inline-flex; align-items:center; gap:.7rem; padding:.95rem 1.5rem; font-family:Bricolage,system-ui,sans-serif; font-weight:600; font-size:1.02rem; letter-spacing:-.01em; text-decoration:none; color:#0e1a14; background:#c7a96b; border:1px solid #c7a96b; border-radius:3px; box-shadow:0 4px 14px -6px rgba(0,0,0,.7); transition:background-color .2s cubic-bezier(.16,1,.3,1), transform .2s cubic-bezier(.16,1,.3,1), box-shadow .2s cubic-bezier(.16,1,.3,1); } .ds-btn__a { width:1rem; height:1rem; flex:none; } .ds-btn:hover { background:#e0c894; border-color:#e0c894; transform:translateY(-2px); box-shadow:0 10px 24px -10px rgba(0,0,0,.8); } .ds-btn:focus-visible { outline:2px solid #e0c894; outline-offset:3px; }"
+    },
+    {
+      "name": "Ghost Action",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action; found by its edge rather than its fill.",
+      "html": "<a class=\"ds-ghost\" href=\"#\">See the engagement</a>",
+      "css": ".ds-ghost { display:inline-flex; align-items:center; padding:.95rem 1.5rem; font-family:Bricolage,system-ui,sans-serif; font-weight:600; font-size:1.02rem; text-decoration:none; color:#e9e5da; background:transparent; border:1px solid #33493b; border-radius:3px; transition:background-color .2s cubic-bezier(.16,1,.3,1), border-color .2s cubic-bezier(.16,1,.3,1); } .ds-ghost:hover { background:#1b2c22; border-color:#c7a96b; } .ds-ghost:focus-visible { outline:2px solid #e0c894; outline-offset:3px; }"
+    },
+    {
+      "name": "Stage",
+      "kind": "card",
+      "refersTo": "stage",
+      "description": "The signature container: a drafting surface ruled at the same 2:1 isometric angle as the object standing on it.",
+      "html": "<div class=\"ds-stage\"><p class=\"ds-stage__d\">object</p></div>",
+      "css": ".ds-stage { position:relative; padding:2rem; background:radial-gradient(120% 90% at 50% 0%, rgba(199,169,107,.06), transparent 65%), #142219; border:1px solid #27392e; border-radius:3px; overflow:hidden; } .ds-stage::after { content:''; position:absolute; inset:0; background-image:repeating-linear-gradient(26.565deg, rgba(199,169,107,.06) 0 1px, transparent 1px 32px), repeating-linear-gradient(-26.565deg, rgba(199,169,107,.06) 0 1px, transparent 1px 32px); pointer-events:none; } .ds-stage__d { position:relative; z-index:1; margin:0; text-align:center; font-family:Bricolage,system-ui,sans-serif; font-weight:600; font-size:.7rem; letter-spacing:.18em; text-transform:uppercase; color:#c7a96b; }"
+    },
+    {
+      "name": "Ledger",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Two-column definition list with tabular figures; the total row drops its rule and turns brass.",
+      "html": "<div class=\"ds-ledger\"><dl><div class=\"r\"><dt>Documented trade offer</dt><dd>$56,000</dd></div><div class=\"r\"><dt>Well-run private sale</dt><dd>$64,500</dd></div><div class=\"r t\"><dt>You keep</dt><dd>$6,500</dd></div></dl></div>",
+      "css": ".ds-ledger { padding:2rem; background:#142219; border:1px solid #27392e; border-radius:3px; } .ds-ledger dl { margin:0; display:grid; grid-template-columns:minmax(0,1fr) auto; } .ds-ledger .r { display:contents; } .ds-ledger dt, .ds-ledger dd { margin:0; padding:.75rem 0; border-bottom:1px solid #27392e; font-family:Chivo,system-ui,sans-serif; font-size:1.02rem; } .ds-ledger dt { color:#aeb6ac; } .ds-ledger dd { text-align:right; font-variant-numeric:tabular-nums; font-family:Bricolage,system-ui,sans-serif; font-weight:600; color:#e9e5da; } .ds-ledger .t dt, .ds-ledger .t dd { border-bottom:none; padding-top:1.1rem; color:#c7a96b; font-size:1.5rem; }"
+    },
+    {
+      "name": "Placeholder Marker",
+      "kind": "chip",
+      "refersTo": "panel",
+      "description": "Marks a commercial fact the business has not decided. Ships; it is how the system refuses to invent a claim.",
+      "html": "<p class=\"ds-todo-line\"><span class=\"ds-todo\">Confirm</span> These bands are drafted, not set.</p>",
+      "css": ".ds-todo-line { margin:0; font-family:Chivo,system-ui,sans-serif; font-size:.92rem; color:#aeb6ac; } .ds-todo { display:inline-block; margin-right:.35rem; font-family:Bricolage,system-ui,sans-serif; font-weight:700; font-size:.6rem; letter-spacing:.12em; text-transform:uppercase; padding:.2rem .45rem; border:1px dashed #c7a96b; border-radius:2px; color:#c7a96b; vertical-align:middle; }"
+    },
+    {
+      "name": "Disclosure",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "Full-width question rows on hairlines, with a brass chevron.",
+      "html": "<details class=\"ds-disc\" open><summary>You are new. Why would I hand you my car?</summary><p>Judge the standard rather than the resume.</p></details>",
+      "css": ".ds-disc { border-top:1px solid #27392e; border-bottom:1px solid #27392e; } .ds-disc summary { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.35rem 0; cursor:pointer; list-style:none; font-family:Bricolage,system-ui,sans-serif; font-weight:600; font-size:1.5rem; letter-spacing:-.018em; color:#e9e5da; } .ds-disc summary::-webkit-details-marker { display:none; } .ds-disc summary::after { content:''; width:.85rem; height:.85rem; flex:none; border-right:1.5px solid #c7a96b; border-bottom:1.5px solid #c7a96b; transform:rotate(45deg) translate(-2px,-2px); transition:transform .26s cubic-bezier(.16,1,.3,1); } .ds-disc[open] summary::after { transform:rotate(-135deg) translate(-3px,-3px); } .ds-disc p { margin:0; padding-bottom:1.5rem; font-family:Chivo,system-ui,sans-serif; font-size:1.02rem; line-height:1.65; color:#aeb6ac; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Build-Instruction Book, In Motion",
+    "overview": "This system explains a service the way a numbered build booklet explains a model: white pages, sky-blue instruction fields, oversized step numerals, black keylines around every part, and diagrams that show the mechanism rather than describing it.\n\nThe subject is drawn as isometric voxel vehicles, generated as real SVG geometry at build time. The business has completed no sales, so it owns no photography of its own work, and a vehicle-sales service that borrows someone else's car photography undermines the exact credibility it is selling.\n\nWhat separates this from a static diagram system is that the diagrams move. All motion shares one grammar \u2014 travel along the isometric road, or seat onto it \u2014 so the page reads as one mechanism rather than a set of decorated panels.",
+    "keyCharacteristics": [
+      "White ground, colour confined to bordered instruction fields",
+      "1.5px black keyline on every surface and every voxel face",
+      "Isometric voxel vehicles as the only illustration, generated not photographed",
+      "Oversized numerals as the dominant type gesture",
+      "Brick red reserved for value recovered; part yellow for parts and the action",
+      "One motion grammar: travel along the road, or seat onto it"
+    ],
+    "rules": [
+      {
+        "name": "The Recovered Value Rule",
+        "body": "Brick red marks value that has been recovered or a route that has been chosen. Nothing else.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Signals Rule",
+        "body": "Red and yellow never appear in the same element. Red is outcome; yellow is part and action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Field Rule",
+        "body": "Saturated colour lives inside a bordered field, never as a full-bleed page background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Numeral Weight Rule",
+        "body": "In a sequence, the number is a display element, not a bullet.",
+        "section": "typography"
+      },
+      {
+        "name": "The Figure Slot Rule",
+        "body": "The figure size is for numbers. A phrase set at figure scale reads as a number the eye then fails to find.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Kicker Rule",
+        "body": "No small uppercase line ever sits above a heading or above a figure.",
+        "section": "typography"
+      },
+      {
+        "name": "The Keyline-First Rule",
+        "body": "Separation is drawn, not shaded. Any panel or field is defined by a 1.5px ink border.",
+        "section": "elevation"
+      },
+      {
+        "name": "The One Grammar Rule",
+        "body": "Anything that moves either travels the road or seats onto it. A fade, a scale, a spin, or a per-section entrance reveal is outside the system.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Reduced-Motion Rule",
+        "body": "With motion suppressed, every layer must rest in a composed position, so base positions are authored as a balanced still.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do draw every vehicle as isometric voxel geometry generated at build time.",
+      "Do keep brick red for value recovered and routes chosen.",
+      "Do emit unbroken flat ground as a plate, not as a field of voxels.",
+      "Do wrap an animated body in one g[data-layer], never one group per voxel.",
+      "Do author base positions as a balanced still, since that is what reduced-motion users see.",
+      "Do put framing in the unit line beneath a figure, never in an uppercase line above it.",
+      "Do declare minmax(0, 1fr) on every grid track that can contain a voxel scene.",
+      "Do mark an undecided commercial fact with the Placeholder Marker rather than writing plausible copy.",
+      "Do label illustrative arithmetic as an illustration, in the same breath as the numbers."
+    ],
+    "donts": [
+      "Don't flood a page with page blue; it belongs inside bordered fields.",
+      "Don't put a small uppercase line above a heading or a figure.",
+      "Don't use a zero-blur offset shadow.",
+      "Don't introduce photography, or a gradient standing in for a drawn part.",
+      "Don't add motion outside the two named animations; per-section entrance reveals are not part of this system.",
+      "Don't put red and yellow in the same element.",
+      "Don't state a projected sale price, an average uplift, or any outcome the business has not achieved.",
+      "Don't set text lighter than Ink Faint (#5e686f)."
+    ]
+  }
+}
