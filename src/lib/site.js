@@ -26,19 +26,12 @@ export const site = {
   phone: null,
 
   /**
-   * Web3Forms access key — this is what makes the form actually deliver.
+   * The Cloudflare Worker that receives the form and emails it on via Resend.
    *
-   * Get one in about a minute at https://web3forms.com: enter
-   * sales@larpauto.com, and the key is emailed to you. No account, no
-   * password, free. Paste it here and every submission is forwarded to that
-   * address. It is a public key by design; it only ever posts to your inbox,
-   * so it is safe to ship in the page.
+   * Deploy it from worker/ (see REPLACE.md), then paste the URL it prints —
+   * something like https://larpauto-form.<your-subdomain>.workers.dev
    *
-   * Works on any host — Squarespace, Netlify, anywhere — because it is just a
-   * request to their API from the visitor's browser. No backend of your own.
-   *
-   * Until this is set the form cannot deliver, and it will say so plainly
-   * rather than pretending to send.
+   * Left null, the form sends nothing and says so rather than pretending.
    */
-  formAccessKey: null,
+  formEndpoint: null,
 };

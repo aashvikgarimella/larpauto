@@ -1,0 +1,18 @@
+name = "larpauto-form"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+# Who receives the enquiry.
+TO_EMAIL = "sales@larpauto.com"
+
+# Who it appears to come from. Must be on a domain verified in Resend.
+# Until larpauto.com is verified there, use "onboarding@resend.dev".
+FROM_EMAIL = "form@larpauto.com"
+
+# Only these origins may POST. Anything else is refused, so the endpoint
+# cannot be used as an open relay from someone else's page.
+ALLOWED_ORIGINS = "https://larpauto.com,https://www.larpauto.com,https://aashvikgarimella.github.io"
+
+# RESEND_API_KEY is a secret, never a var:
+#   npx wrangler secret put RESEND_API_KEY

@@ -515,13 +515,10 @@ const arrow = `<svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" fo
           id="valuation"
           name="valuation"
           method="POST"
-          action="https://api.web3forms.com/submit"
-          data-key={site.formAccessKey || ''}
+          action={site.formEndpoint || undefined}
+          data-endpoint={site.formEndpoint || ''}
           data-inbox={site.email}
         >
-          <input type="hidden" name="access_key" value={site.formAccessKey || ''} />
-          <input type="hidden" name="subject" value="New valuation request — larpauto.com" />
-          <input type="hidden" name="from_name" value="LARP Auto website" />
           <p class="form__trap">
             <label>Leave this empty<input name="company-website" tabindex="-1" autocomplete="off" /></label>
           </p>
@@ -635,10 +632,10 @@ const arrow = `<svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" fo
           if (form.elements['company-website'] && form.elements['company-website'].value) return;
           if (!form.reportValidity()) return;
 
-          var key = form.getAttribute('data-key');
+          var endpoint = form.getAttribute('data-endpoint');
           var inbox = form.getAttribute('data-inbox');
 
-          if (!key) {
+          if (!endpoint) {
             show(
               'This form is not connected yet, so nothing was sent. Please email ' +
               inbox + ' directly and we will pick it up from there.',
@@ -652,10 +649,15 @@ const arrow = `<svg class="btn__arrow" viewBox="0 0 16 16" aria-hidden="true" fo
             btn.textContent = 'Sending…';
           }
 
-          fetch(form.action, {
+          fetch(endpoint, {
             method: 'POST',
-            headers: { Accept: 'application/json' },
-            body: new FormData(form),
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify(
+              Object.fromEntries(new FormData(form).entries())
+            ),
           })
             .then(function (r) {
               return r.json().catch(function () { return { success: r.ok }; });
