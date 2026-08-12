@@ -33,5 +33,5 @@ export const site = {
    *
    * Left null, the form sends nothing and says so rather than pretending.
    */
-  formEndpoint: null,
+  formEndpoint: 'https://larpauto-form.larpauto.workers.dev',
 };
